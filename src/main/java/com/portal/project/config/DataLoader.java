@@ -22,11 +22,6 @@ public class DataLoader implements ApplicationRunner {
 	@Autowired
 	private RoleRepository roleRepository;
 
-//    @Autowired
-//    public DataLoader(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
-    
     @Override
     public void run(ApplicationArguments args) {
     	Role employeeRole = new Role(3L,null,"EMPLOYEE");
