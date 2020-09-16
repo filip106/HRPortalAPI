@@ -49,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		
 		httpSecurity.cors().and().csrf().disable()	
-				.authorizeRequests().antMatchers(HttpMethod.POST, "/login", "/register","/validate").permitAll().
+				.authorizeRequests().antMatchers("/login","/validate","/verify-registration-token/**","/enable-user/**","/images/**").permitAll().
 				antMatchers("/employee/**").hasAuthority("EMPLOYEE").
 				antMatchers("/manager/**").hasAuthority("MANAGER").
 				antMatchers("/admin/**").hasAuthority("ADMIN").
@@ -62,7 +62,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
     CorsConfigurationSource corsConfigurationSource() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.addAllowedHeader("*");
+        corsConfiguration.addAllowedMethod("*");
+        corsConfiguration.addAllowedOrigin("*");
+        source.registerCorsConfiguration("/**", corsConfiguration);
         return source;
     }
 

@@ -49,7 +49,7 @@ public class RequestFilter extends OncePerRequestFilter{
 			}
 		} else {
 			if(!request.getRequestURI().endsWith("/validate") && !request.getRequestURI().endsWith("/register")
-					&& !request.getRequestURI().endsWith("/login"))
+					&& !request.getRequestURI().endsWith("/login") && !request.getRequestURI().contains("/images/"))
 				logger.warn("JWT Token does not begin with Bearer String");
 		}
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
